@@ -1,0 +1,394 @@
+/* SpaceProof Demo - Stealth Bomber Compliant Palette */
+/* Dark by Default - Doctrine 1 */
+
+:root {
+  --bg: #0a0a0a;           /* Deep charcoal */
+  --text: #E2E8F0;         /* Bone white */
+  --threat: #DC2626;       /* Emergency red (counterfeit detected) */
+  --success: #4B5563;      /* Muted gray (NOT green) */
+  --highlight: #F59E0B;    /* Amber (orbital mode active) */
+  --dim: #6B7280;          /* Dimmed text */
+  --border: #374151;       /* Subtle borders */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Terminal Container */
+.terminal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.system-title {
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+.status-dot.armed {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.orbital {
+  background: var(--highlight);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Terminal Output */
+.terminal-output {
+  background: transparent;
+  min-height: 500px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  overflow-y: auto;
+  max-height: calc(100vh - 280px);
+}
+
+.terminal-line {
+  padding: 2px 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal-line.command {
+  color: var(--highlight);
+}
+
+.terminal-line.response {
+  color: var(--text);
+}
+
+.terminal-line.error {
+  color: var(--threat);
+}
+
+.terminal-line.success {
+  color: var(--success);
+}
+
+.terminal-line.dim {
+  color: var(--dim);
+}
+
+.terminal-line.highlight {
+  color: var(--highlight);
+}
+
+/* Command Input */
+.command-input-container {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+
+.prompt {
+  color: var(--highlight);
+  margin-right: 8px;
+  user-select: none;
+}
+
+.command-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  outline: none;
+}
+
+.command-input::placeholder {
+  color: var(--dim);
+}
+
+/* Side-by-side comparison */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 16px 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+
+.comparison-column {
+  padding: 12px;
+}
+
+.comparison-column h4 {
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.comparison-column.orbital h4 {
+  color: var(--highlight);
+}
+
+/* Verification Result Box */
+.verification-result {
+  border: 1px solid var(--border);
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.verification-result.counterfeit {
+  border-color: var(--threat);
+}
+
+.verification-result.verified {
+  border-color: var(--success);
+}
+
+.verification-result h3 {
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 12px;
+}
+
+.verification-result.counterfeit h3 {
+  color: var(--threat);
+}
+
+/* Metrics display */
+.metrics-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.metrics-label {
+  color: var(--dim);
+}
+
+.metrics-value {
+  color: var(--text);
+}
+
+.metrics-value.highlight {
+  color: var(--highlight);
+}
+
+.metrics-value.threat {
+  color: var(--threat);
+}
+
+/* Spaceproof Verified Box */
+.spaceproof-verified {
+  border: 2px solid var(--success);
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.spaceproof-verified h2 {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.proof-list {
+  text-align: left;
+  margin: 16px 0;
+  padding-left: 20px;
+}
+
+.proof-list li {
+  padding: 4px 0;
+  list-style: none;
+}
+
+.proof-list li::before {
+  content: "\2713 ";
+  color: var(--success);
+  margin-right: 8px;
+}
+
+/* Cryptographic Proof Section */
+.crypto-proof {
+  border: 1px solid var(--border);
+  padding: 16px;
+  margin: 16px 0;
+  font-size: 12px;
+}
+
+.crypto-proof h4 {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  font-weight: normal;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hash-display {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--dim);
+  word-break: break-all;
+  padding: 4px 0;
+}
+
+/* Artifact Generation */
+.artifact-preview {
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.artifact-preview h3 {
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 16px;
+}
+
+.download-button {
+  background: transparent;
+  border: 1px solid var(--text);
+  color: var(--text);
+  padding: 8px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.download-button:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* ROI Section */
+.roi-section {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.roi-section h4 {
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  font-weight: normal;
+  margin-bottom: 12px;
+}
+
+.roi-value {
+  font-size: 24px;
+  color: var(--text);
+  margin: 8px 0;
+}
+
+/* Control Buttons - Ghost style */
+.controls {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.control-button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--dim);
+  padding: 8px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.control-button:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.control-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-top: 20px;
+  font-size: 11px;
+  color: var(--dim);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Cursor blink */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: var(--text);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
