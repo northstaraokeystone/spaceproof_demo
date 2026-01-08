@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceProof - Orbital Hardware Verification</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Georgia&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="terminal">
+        <header class="terminal-header">
+            <div class="status-indicator">
+                <span class="pulse"></span>
+                <span id="system-status">SYSTEM ARMED</span>
+            </div>
+            <div class="mode-indicator">
+                <span id="current-mode">TERRESTRIAL</span>
+            </div>
+        </header>
+
+        <main class="terminal-body">
+            <div id="output" class="output-area"></div>
+            <div class="input-line">
+                <span class="prompt">spaceproof&gt;</span>
+                <input type="text" id="command-input" autocomplete="off" spellcheck="false" placeholder="Enter command...">
+            </div>
+        </main>
+
+        <footer class="terminal-footer">
+            <div class="metrics">
+                <span>THREATS: <span id="threat-count">0</span></span>
+                <span>VERIFIED: <span id="verified-count">0</span></span>
+                <span>RECEIPTS: <span id="receipt-count">0</span></span>
+            </div>
+            <div class="controls">
+                <button id="btn-demo" class="ghost-btn">RUN DEMO [SPACE]</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Artifact Modal -->
+    <div id="artifact-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>VERIFICATION REPORT</h2>
+                <button id="close-modal" class="ghost-btn">CLOSE</button>
+            </div>
+            <div id="artifact-body" class="modal-body"></div>
+            <div class="modal-footer">
+                <button id="download-artifact" class="ghost-btn">DOWNLOAD PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="entropy_engine.js"></script>
+    <script src="receipt_chain.js"></script>
+    <script src="orbital_sim.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>

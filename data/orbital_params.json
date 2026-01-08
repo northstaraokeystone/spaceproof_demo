@@ -1,0 +1,47 @@
+{
+  "node": {
+    "id": "ORBITAL-NODE-7",
+    "tle": {
+      "line1": "1 00000U 24001A   24001.00000000  .00000000  00000-0  00000-0 0  0000",
+      "line2": "2 00000  51.6000   0.0000 0000000   0.0000   0.0000 15.05000000000000"
+    },
+    "altitude_km": 550,
+    "inclination_deg": 51.6,
+    "orbital_period_min": 95.7,
+    "eccentricity": 0.0001,
+    "hardware": {
+      "compute": "H100-ORBITAL-VERIFIED",
+      "tee": "NVIDIA-CONFIDENTIAL-COMPUTE",
+      "memory_gb": 80,
+      "thermal_management": "RADIATIVE"
+    }
+  },
+  "physics": {
+    "speed_of_light_km_s": 299792.458,
+    "earth_radius_km": 6371,
+    "cosmic_background_temp_c": -270.45,
+    "solar_flux_w_m2": 1361
+  },
+  "verification": {
+    "challenge_size_bytes": 16,
+    "response_size_bytes": 16,
+    "kepler_signature_size_bytes": 32,
+    "tee_attestation_format": "NVIDIA-RA"
+  },
+  "thermal": {
+    "terrestrial_noise_celsius": 5,
+    "orbital_noise_celsius": 0.001,
+    "radiative_equilibrium_temp_c": -270
+  },
+  "latency": {
+    "orbital_processing_ms": 0.5,
+    "terrestrial_processing_ms": 2.0,
+    "fiber_refractive_index": 1.5
+  },
+  "throughput": {
+    "terrestrial_verifications_per_sec": 1,
+    "orbital_verifications_per_sec": 10,
+    "terrestrial_cost_per_verification_usd": 0.0003,
+    "orbital_cost_per_verification_usd": 0
+  }
+}

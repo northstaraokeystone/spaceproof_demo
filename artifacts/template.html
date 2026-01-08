@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpaceProof Verification Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background: #fff;
+            color: #1a1a1a;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            border-bottom: 2px solid #1a1a1a;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .header .subtitle {
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 1px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            font-size: 14px;
+            font-weight: normal;
+            letter-spacing: 1px;
+            color: #666;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 13px;
+        }
+        .row .label {
+            color: #666;
+        }
+        .row .value {
+            font-family: 'Courier New', monospace;
+        }
+        .row .value.alert {
+            color: #DC2626;
+            font-weight: bold;
+        }
+        .row .value.highlight {
+            color: #F59E0B;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .comparison-table th {
+            background: #f5f5f5;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        .comparison-table .highlight {
+            color: #F59E0B;
+            font-weight: bold;
+        }
+        .crypto-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            word-break: break-all;
+        }
+        .crypto-box .title {
+            font-family: 'Georgia', serif;
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        .crypto-box .hash {
+            margin: 5px 0;
+            color: #666;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 11px;
+            color: #999;
+        }
+        .verdict-box {
+            background: #FEF2F2;
+            border: 1px solid #DC2626;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .verdict-box .verdict {
+            font-size: 18px;
+            color: #DC2626;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SPACEPROOF VERIFICATION REPORT</h1>
+        <div class="subtitle">CRYPTOGRAPHICALLY VERIFIED HARDWARE ASSESSMENT</div>
+    </div>
+
+    <div class="section">
+        <h2>COMPONENT IDENTIFICATION</h2>
+        <div class="row">
+            <span class="label">Component ID:</span>
+            <span class="value">{{component_id}}</span>
+        </div>
+        <div class="row">
+            <span class="label">Component Type:</span>
+            <span class="value">{{component_type}}</span>
+        </div>
+        <div class="row">
+            <span class="label">Verification Date:</span>
+            <span class="value">{{timestamp}}</span>
+        </div>
+    </div>
+
+    <div class="verdict-box">
+        <div class="verdict">{{verdict}}</div>
+    </div>
+
+    <div class="section">
+        <h2>VERIFICATION COMPARISON</h2>
+        <table class="comparison-table">
+            <tr>
+                <th>METRIC</th>
+                <th>TERRESTRIAL</th>
+                <th>ORBITAL</th>
+            </tr>
+            <tr>
+                <td>Entropy Value</td>
+                <td>{{entropy_terrestrial}}</td>
+                <td class="highlight">{{entropy_orbital}}</td>
+            </tr>
+            <tr>
+                <td>Confidence</td>
+                <td>{{confidence_terrestrial}}</td>
+                <td class="highlight">{{confidence_orbital}}</td>
+            </tr>
+            <tr>
+                <td>Noise Floor</td>
+                <td>+/-{{noise_terrestrial}}</td>
+                <td class="highlight">+/-{{noise_orbital}}</td>
+            </tr>
+            <tr>
+                <td>Thermal Baseline</td>
+                <td>{{thermal_terrestrial}}C</td>
+                <td class="highlight">{{thermal_orbital}}C</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>ORBITAL PROOF OF LOCATION</h2>
+        <div class="row">
+            <span class="label">Orbital Node:</span>
+            <span class="value">{{node_id}}</span>
+        </div>
+        <div class="row">
+            <span class="label">Altitude:</span>
+            <span class="value">{{altitude_km}} km</span>
+        </div>
+        <div class="row">
+            <span class="label">Light-Speed Delay:</span>
+            <span class="value">{{light_delay_ms}} ms</span>
+        </div>
+        <div class="row">
+            <span class="label">TEE Attestation:</span>
+            <span class="value">{{tee_attestation}}</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>RISK MITIGATION</h2>
+        <div class="row">
+            <span class="label">Counterfeits Detected:</span>
+            <span class="value alert">{{counterfeits_detected}}</span>
+        </div>
+        <div class="row">
+            <span class="label">Estimated Savings:</span>
+            <span class="value highlight">{{estimated_savings}}</span>
+        </div>
+        <div class="row">
+            <span class="label">Failure Mode Avoided:</span>
+            <span class="value">{{failure_avoided}}</span>
+        </div>
+    </div>
+
+    <div class="crypto-box">
+        <div class="title">CRYPTOGRAPHIC PROOF CHAIN</div>
+        <div class="hash">Kepler Signature: {{kepler_signature}}</div>
+        <div class="hash">Merkle Root: {{merkle_root}}</div>
+        <div class="hash">Receipt Count: {{receipt_count}}</div>
+        <div class="hash">Chain Integrity: {{chain_integrity}}</div>
+    </div>
+
+    <div class="footer">
+        <p>This report is cryptographically anchored via dual-hash (SHA256:BLAKE3) Merkle tree verification.</p>
+        <p>Tamper-evident and court-admissible. Generated by SpaceProof Orbital Verification System v1.0</p>
+    </div>
+</body>
+</html>

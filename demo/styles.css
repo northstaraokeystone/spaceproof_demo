@@ -1,0 +1,395 @@
+/* SpaceProof Demo - Stealth Bomber Compliant Palette */
+/* Doctrine 1: Dark by Default */
+
+:root {
+    --bg: #0a0a0a;
+    --bg-secondary: #111111;
+    --text: #E2E8F0;
+    --text-muted: #6B7280;
+    --threat: #DC2626;
+    --success: #4B5563;
+    --highlight: #F59E0B;
+    --border: #1F2937;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Terminal Container */
+#terminal {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+#system-status {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+
+.mode-indicator {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.mode-indicator.orbital {
+    border-color: var(--highlight);
+    color: var(--highlight);
+}
+
+/* Main Terminal Body */
+.terminal-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.output-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.output-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.output-area::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.output-area::-webkit-scrollbar-thumb {
+    background: var(--border);
+}
+
+/* Output Line Styles */
+.output-line {
+    padding: 2px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.output-line.command {
+    color: var(--highlight);
+}
+
+.output-line.result {
+    color: var(--text);
+}
+
+.output-line.error {
+    color: var(--threat);
+}
+
+.output-line.success {
+    color: var(--success);
+}
+
+.output-line.highlight {
+    color: var(--highlight);
+}
+
+.output-line.muted {
+    color: var(--text-muted);
+}
+
+/* Threat Detection Box */
+.threat-box {
+    border: 1px solid var(--threat);
+    background: rgba(220, 38, 38, 0.1);
+    padding: 16px;
+    margin: 12px 0;
+}
+
+.threat-box .threat-header {
+    color: var(--threat);
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+/* Verification Box */
+.verify-box {
+    border: 1px solid var(--success);
+    background: rgba(75, 85, 99, 0.1);
+    padding: 16px;
+    margin: 12px 0;
+}
+
+.verify-box.orbital {
+    border-color: var(--highlight);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+/* Comparison Table */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid var(--border);
+}
+
+.comparison-table th {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.comparison-table .highlight-cell {
+    color: var(--highlight);
+}
+
+/* Input Line */
+.input-line {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+}
+
+.prompt {
+    color: var(--text-muted);
+    margin-right: 10px;
+}
+
+#command-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    outline: none;
+}
+
+#command-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+/* Footer */
+.terminal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 10px;
+}
+
+.metrics {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.metrics span span {
+    color: var(--text);
+}
+
+/* Buttons */
+.ghost-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ghost-btn:hover {
+    border-color: var(--text);
+    color: var(--text);
+}
+
+.ghost-btn:active {
+    background: var(--bg-secondary);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.modal-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Artifact Specific Styles */
+.artifact-section {
+    margin-bottom: 24px;
+}
+
+.artifact-section h3 {
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    font-weight: normal;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+}
+
+.artifact-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+}
+
+.artifact-label {
+    color: var(--text-muted);
+}
+
+.artifact-value {
+    color: var(--text);
+}
+
+.artifact-value.threat {
+    color: var(--threat);
+}
+
+.artifact-value.highlight {
+    color: var(--highlight);
+}
+
+/* Crypto Proof Box */
+.crypto-proof {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 16px;
+    margin-top: 16px;
+    font-size: 11px;
+}
+
+.crypto-proof .hash {
+    font-family: 'JetBrains Mono', monospace;
+    word-break: break-all;
+    color: var(--text-muted);
+}
+
+/* Loading Animation - Subtle */
+.loading::after {
+    content: '';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+/* No animations for transitions - Doctrine 2 compliance */
+/* Pauses are handled in JavaScript with setTimeout */
