@@ -1,0 +1,206 @@
+# RECEIPTS-NATIVE ARCHITECTURE v2.0
+*From 875 lines → 180. Same power.*
+
+---
+
+## LAWS (memorize these)
+```
+LAW 1: No receipt → not real
+LAW 2: No test → not shipped  
+LAW 3: No gate → not alive
+```
+
+## PHYSICS (why it works)
+- **Compression = Discovery**: Legit data compresses (≥0.85). Fraud doesn't (<0.70).
+- **Receipts = Physics**: Every function emits `sha256:blake3` proof. Not logging—proof of work.
+- **Entropy = Governance**: Health = Shannon bits. Fitness = entropy reduction per receipt.
+
+---
+
+## MANDATORY STACK (every system)
+
+| File | Functions | Non-negotiable |
+|------|-----------|----------------|
+| `core.py` | `dual_hash()`, `emit_receipt()`, `merkle_root()`, `StopRule()` | All four required |
+| `ledger.py` | `ingest()`, `query()`, `batch_anchor()`, `verify_chain()` | Append-only |
+| `receipts.jsonl` | — | One receipt per line |
+| `sim/` | 7 scenarios | All pass or no ship |
+| `tests/` | pytest | 100% coverage |
+
+**Receipt Schema** (every receipt, no exceptions):
+```json
+{"receipt_type": "str", "ts": "ISO8601", "tenant_id": "str", "payload": {}, "payload_hash": "sha256:blake3"}
+```
+
+**Receipt Levels** (self-verification = L4 informs L0):
+- L0: Events (ingest, anchor)
+- L1: Agents (alert, wound)  
+- L2: Deploys (deploy, rollback)
+- L3: Effectiveness (health, metrics)
+- L4: Meta (cycle, topology)
+
+---
+
+## CONTEXT ENGINEERING (replaces prompt engineering)
+
+**The Decision**: Which context source answers this query?
+
+| Query Type | Primary Source | Fallback | Confidence Threshold |
+|------------|---------------|----------|---------------------|
+| Historical fact | Receipt ledger | — | 0.95 |
+| Pattern match | META-LOOP topology | Receipt scan | 0.85 |
+| External validation | Web search | Fail gracefully | 0.70 |
+| Cross-domain | Temporal graph | Cosine similarity | 0.80 |
+
+**Rule**: If primary confidence < threshold → auto-fallback. No human intervention required.
+
+```python
+def select_context(query_type: str, confidence: float) -> ContextSource:
+    if confidence >= THRESHOLDS[query_type]:
+        return PRIMARY_SOURCES[query_type]
+    return FALLBACK_SOURCES[query_type]  # Self-correcting
+```
+
+---
+
+## MCP PROTOCOL (how systems expose receipts)
+
+Every receipts-native system MUST expose an MCP server:
+
+```json
+{
+  "mcpServers": {
+    "proofpack": {
+      "command": "python",
+      "args": ["-m", "proofpack.mcp_server"],
+      "tools": ["query_receipts", "verify_chain", "get_topology"]
+    }
+  }
+}
+```
+
+**Required MCP Tools** (minimum viable):
+- `query_receipts(filters)` → Returns matching receipts
+- `verify_chain(start, end)` → Returns integrity boolean
+- `get_topology(pattern_id)` → Returns open/closed/hybrid
+
+This enables Claude Desktop, Cursor, any MCP client to use your receipts as trust layer.
+
+---
+
+## HITL/HOTL DECISION MATRIX (who decides)
+
+| Risk Level | Model | Human Role | Examples |
+|------------|-------|------------|----------|
+| **CRITICAL** | Human-in-Loop (HITL) | Approves each decision | Fraud alert, system halt, graduation |
+| **HIGH** | Human-on-Loop (HOTL) | Monitors dashboard, intervenes on trigger | Anomaly detection, cascade spawning |
+| **MEDIUM** | Autonomous + Audit | Reviews samples post-hoc | Receipt ingestion, topology classification |
+| **LOW** | Full Autonomous | Audit trail only | Compression, hashing, Merkle batching |
+
+**Implementation**:
+```python
+def gate_decision(action: Action) -> Approval:
+    risk = assess_risk(action)
+    if risk == "CRITICAL": return await_human_approval(action)
+    if risk == "HIGH": return approve_with_monitoring(action)
+    if risk == "MEDIUM": return approve_and_log(action)
+    return auto_approve(action)
+```
+
+**Every decision emits**: `gate_receipt` with `risk_level`, `approval_type`, `approver_id`
+
+---
+
+## BUILD GATES (T+0 → T+48h)
+
+| Gate | Deliverables | Pass Criteria |
+|------|--------------|---------------|
+| **T+2h** | spec.md, ledger_schema.json, core.py stub | `dual_hash()` emits valid receipt |
+| **T+24h** | All modules, 80% test coverage | BASELINE scenario passes |
+| **T+48h** | 100% coverage, all 7 scenarios | Production-ready |
+
+**Validation Protocol**:
+```bash
+# Phase 1 (run immediately, wait for approval)
+python -c "from src.core import dual_hash; assert ':' in dual_hash(b'test')"
+python -c "from src.cycle import run_cycle; [run_cycle() for _ in range(10)]"
+
+# Phase 2 (only after Phase 1 approved)
+pytest tests/test_scenarios.py -v
+```
+
+---
+
+## 7 MANDATORY SCENARIOS (no exceptions)
+
+| # | Name | Cycles | Pass Criteria |
+|---|------|--------|---------------|
+| 1 | BASELINE | 1000 | 99.9% completion, 0 violations |
+| 2 | STRESS | 500 | ≥95% accuracy at 5x volume, <5.5GB |
+| 3 | TOPOLOGY | 100 | ≥98% classification accuracy |
+| 4 | CASCADE | 100 | Exact variant count, all backtest pass |
+| 5 | COMPRESSION | 200 | Meta-pattern outperforms both by ≥5% |
+| 6 | SINGULARITY | 2000* | Population converges, entropy negative |
+| 7 | THERMODYNAMIC | 1000 | |Δentropy| < 0.01 every cycle |
+
+*Reduced from 10k—early termination on convergence.
+
+---
+
+## DOMAIN COMPOSITIONS (mandatory, not optional)
+
+| Domain | Required Modules | Critical Scenario |
+|--------|------------------|-------------------|
+| **Telemetry (QED)** | core + ledger + detect + anchor | THERMODYNAMIC |
+| **Fraud (ProofPack)** | core + ledger + detect + anchor + loop + mcp_server | STRESS |
+| **Physics (AXIOM)** | core + ledger + anchor + witness | SINGULARITY |
+
+**No "when to add"—these compositions are mandatory for the domain.**
+
+---
+
+## SLO THRESHOLDS (universal)
+
+| Metric | Threshold | Stoprule |
+|--------|-----------|----------|
+| Entropy conservation | |Δ| < 0.01 | HALT |
+| Cycle completion | ≥99.9% | Emit violation |
+| Memory | <5.5GB | Emit violation |
+| Classification accuracy | ≥95% | Emit violation |
+| Detection recall (medical) | 99.999% | HALT on miss |
+
+---
+
+## DIRECTORY STRUCTURE (standard)
+
+```
+system_name/
+├── spec.md
+├── ledger_schema.json
+├── cli.py
+├── receipts.jsonl
+├── mcp_server.py          # NEW: MCP interface
+├── src/
+│   ├── core.py
+│   ├── ledger.py
+│   ├── context.py         # NEW: Context engineering
+│   └── [domain].py
+├── sim/
+│   ├── sim.py
+│   └── scenarios.py
+├── tests/
+└── MANIFEST.anchor
+```
+
+---
+
+## THE PARADIGM SHIFT
+
+**OLD**: Architecture describes what components DO.
+**NEW**: Architecture prescribes how components DECIDE which context to use.
+
+Receipts aren't storage—they're **context sources** in a self-correcting pipeline.
+
+---
+
+*No receipt → not real. No test → not shipped. No gate → not alive.*
