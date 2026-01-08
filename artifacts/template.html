@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SpaceProof Verification Report</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      margin-top: 30px;
+    }
+    .header-meta {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .section {
+      margin: 20px 0;
+      padding: 20px;
+      border: 1px solid #ddd;
+    }
+    .status-counterfeit {
+      background: #fee2e2;
+      border-color: #dc2626;
+    }
+    .status-genuine {
+      background: #f0fdf4;
+      border-color: #16a34a;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #f5f5f5;
+    }
+    .hash {
+      font-family: 'Consolas', monospace;
+      font-size: 12px;
+      word-break: break-all;
+      background: #f5f5f5;
+      padding: 8px;
+      border-radius: 4px;
+    }
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .comparison-box {
+      padding: 15px;
+      border: 1px solid #ddd;
+    }
+    .comparison-box.orbital {
+      border-color: #f59e0b;
+    }
+    .roi {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+      background: #f5f5f5;
+      margin: 20px 0;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 12px;
+      color: #666;
+    }
+    .verified-badge {
+      text-align: center;
+      padding: 15px;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>SPACEPROOF VERIFICATION REPORT</h1>
+
+  <div class="header-meta">
+    <p>Generated: {{ generated }}</p>
+    <p>Report ID: {{ report_id }}</p>
+  </div>
+
+  <div class="section status-{{ status_class }}">
+    <h2>Component Status</h2>
+    <table>
+      <tr><th>Component ID</th><td>{{ component_id }}</td></tr>
+      <tr><th>Type</th><td>{{ component_type }}</td></tr>
+      <tr><th>Status</th><td><strong>{{ status }}</strong></td></tr>
+    </table>
+  </div>
+
+  <h2>Verification Comparison</h2>
+  <div class="comparison">
+    <div class="comparison-box">
+      <h3>Terrestrial Mode</h3>
+      <table>
+        <tr><th>Entropy</th><td>{{ terrestrial_entropy }}</td></tr>
+        <tr><th>Confidence</th><td>{{ terrestrial_confidence }}</td></tr>
+        <tr><th>Thermal Baseline</th><td>{{ terrestrial_thermal }}</td></tr>
+        <tr><th>Noise Floor</th><td>HIGH (±0.08)</td></tr>
+      </table>
+    </div>
+    <div class="comparison-box orbital">
+      <h3>Orbital Mode</h3>
+      <table>
+        <tr><th>Entropy</th><td>{{ orbital_entropy }}</td></tr>
+        <tr><th>Confidence</th><td>{{ orbital_confidence }}</td></tr>
+        <tr><th>Thermal Baseline</th><td>{{ orbital_thermal }}</td></tr>
+        <tr><th>Noise Floor</th><td>NEGLIGIBLE (±0.01)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>Orbital Location Proof</h2>
+  <div class="section">
+    <table>
+      <tr><th>Challenge</th><td class="hash">{{ challenge }}</td></tr>
+      <tr><th>Response</th><td class="hash">{{ response }}</td></tr>
+      <tr><th>Altitude</th><td>{{ altitude_km }} km</td></tr>
+      <tr><th>Latency</th><td>{{ latency_ms }} ms</td></tr>
+      <tr><th>TEE Attestation</th><td>{{ tee_attestation }}</td></tr>
+    </table>
+  </div>
+
+  <div class="verified-badge">
+    SPACEPROOF VERIFIED
+  </div>
+
+  <p style="text-align: center;">This hardware is cryptographically proven to be:</p>
+  <ol>
+    <li>Operating in verified orbital environment (Kepler signature)</li>
+    <li>Authentic verified hardware (TEE attestation)</li>
+    <li>Supply chain verified (orbital verification chain)</li>
+  </ol>
+
+  <h2>Cryptographic Proof</h2>
+  <div class="section">
+    <p><strong>Receipt Hash:</strong></p>
+    <p class="hash">{{ receipt_hash }}</p>
+
+    <p><strong>Merkle Root:</strong></p>
+    <p class="hash">{{ merkle_root }}</p>
+
+    <p><strong>Hash Algorithms:</strong> SHA256 + BLAKE3 (dual-hash)</p>
+    <p><strong>Batch Size:</strong> {{ batch_size }} receipts</p>
+  </div>
+
+  <h2>Impact Assessment</h2>
+  <div class="roi">
+    ROI: {{ roi_value }}
+  </div>
+  <p style="text-align: center;">
+    Eliminated {{ components_verified }} counterfeit components<br>
+    Avoided {{ failure_description }}
+  </p>
+
+  <div class="footer">
+    <p>This report was generated by SpaceProof v6.0 Orbital Hardware Verification System.</p>
+    <p>Receipts-Native Architecture | Dual-Hash Verification | Merkle-Anchored Audit Trail</p>
+    <p>No receipt, not real. Verification timestamp: {{ timestamp }}</p>
+  </div>
+</body>
+</html>

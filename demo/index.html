@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpaceProof - Orbital Hardware Verification</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Georgia&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="terminal-container">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="system-title">SPACEPROOF VERIFICATION SYSTEM</h1>
+      <div class="status-indicator">
+        <span class="status-dot armed" id="statusDot"></span>
+        <span id="statusText">SYSTEM ARMED</span>
+      </div>
+    </header>
+
+    <!-- Terminal Output -->
+    <div class="terminal-output" id="terminalOutput">
+      <div class="terminal-line dim">SpaceProof v6.0 - Orbital Hardware Verification</div>
+      <div class="terminal-line dim">Entropy-based counterfeit detection with orbital clarity</div>
+      <div class="terminal-line dim">---</div>
+      <div class="terminal-line dim">Type 'help' for available commands or press [SPACE] to run demo</div>
+      <div class="terminal-line">&nbsp;</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button class="control-button" id="btnRunDemo" onclick="runFullDemo()">
+        [SPACE] RUN DEMO
+      </button>
+      <button class="control-button" id="btnReset" onclick="resetDemo()">
+        [R] RESET
+      </button>
+    </div>
+
+    <!-- Command Input -->
+    <div class="command-input-container">
+      <span class="prompt">$</span>
+      <input
+        type="text"
+        class="command-input"
+        id="commandInput"
+        placeholder="Enter command..."
+        autocomplete="off"
+        spellcheck="false"
+      >
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Receipts-Native Architecture | Dual-Hash Verification</span>
+      <span id="timestampDisplay"></span>
+    </footer>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="entropy_engine.js"></script>
+  <script src="orbital_sim.js"></script>
+  <script src="receipt_chain.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>

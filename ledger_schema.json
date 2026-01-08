@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "hash_strategy": {
+    "algorithm": ["SHA256", "BLAKE3"],
+    "format": "sha256:blake3"
+  },
+  "receipt_types": {
+    "demo_launch_receipt": {
+      "receipt_type": "demo_launch",
+      "required_fields": {
+        "ts": "ISO8601",
+        "tenant_id": "string",
+        "version": "string",
+        "mode": "string"
+      }
+    },
+    "component_verification_receipt": {
+      "receipt_type": "component_verification",
+      "required_fields": {
+        "ts": "ISO8601",
+        "tenant_id": "string",
+        "component_id": "string",
+        "component_type": "string",
+        "mode": "string:terrestrial|orbital",
+        "entropy": "float",
+        "entropy_noise": "float",
+        "threshold": "float",
+        "is_genuine": "boolean",
+        "confidence": "float",
+        "thermal_baseline": "string",
+        "verification_time_ms": "float"
+      }
+    },
+    "orbital_verification_receipt": {
+      "receipt_type": "orbital_verification",
+      "required_fields": {
+        "ts": "ISO8601",
+        "tenant_id": "string",
+        "component_id": "string",
+        "entropy_terrestrial": "float",
+        "entropy_orbital": "float",
+        "confidence_terrestrial": "float",
+        "confidence_orbital": "float",
+        "orbital_node": "string",
+        "kepler_signature": "string",
+        "tee_attestation": "string",
+        "latency_ms": "float",
+        "improvement": {
+          "confidence_delta": "float",
+          "noise_reduction": "string"
+        },
+        "payload_hash": "string:dual_hash"
+      }
+    },
+    "mode_switch_receipt": {
+      "receipt_type": "mode_switch",
+      "required_fields": {
+        "ts": "ISO8601",
+        "tenant_id": "string",
+        "from_mode": "string",
+        "to_mode": "string",
+        "node_id": "string",
+        "altitude_km": "float",
+        "thermal_baseline": "string",
+        "latency_ms": "float"
+      }
+    },
+    "location_proof_receipt": {
+      "receipt_type": "location_proof",
+      "required_fields": {
+        "ts": "ISO8601",
+        "tenant_id": "string",
+        "challenge": "string:hex",
+        "response": "string:hex",
+        "altitude_km": "float",
+        "latency_ms": "float",
+        "latency_valid": "boolean",
+        "tee_attestation": "object",
+        "ephemeris": "object",
+        "verified": "boolean"
+      }
+    },
+    "artifact_generation_receipt": {
+      "receipt_type": "artifact_generation",
+      "required_fields": {
+        "ts": "ISO8601",
+        "tenant_id": "string",
+        "artifact_type": "string",
+        "component_id": "string",
+        "verification_mode": "string",
+        "confidence": "float",
+        "roi_value": "string",
+        "merkle_root": "string:dual_hash",
+        "receipt_count": "integer"
+      }
+    },
+    "batch_anchor_receipt": {
+      "receipt_type": "batch_anchor",
+      "required_fields": {
+        "ts": "ISO8601",
+        "tenant_id": "string",
+        "merkle_root": "string:dual_hash",
+        "batch_size": "integer",
+        "hash_algorithms": ["SHA256", "BLAKE3"],
+        "anchor_timestamp": "ISO8601"
+      }
+    }
+  },
+  "slo_thresholds": {
+    "entropy_terrestrial_noise": 0.08,
+    "entropy_orbital_noise": 0.01,
+    "genuine_threshold": 0.82,
+    "confidence_terrestrial_min": 0.85,
+    "confidence_orbital_min": 0.95,
+    "verification_latency_max_ms": 100,
+    "orbital_latency_max_ms": 10
+  }
+}

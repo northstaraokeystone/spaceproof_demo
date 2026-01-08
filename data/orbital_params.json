@@ -1,0 +1,45 @@
+{
+  "nodes": [
+    {
+      "id": "ORBITAL-NODE-7",
+      "name": "LEO Verification Node 7",
+      "tle": {
+        "line1": "1 99999U 25001A   25001.00000000  .00000000  00000-0  00000-0 0  9999",
+        "line2": "2 99999  51.6000   0.0000 0001000   0.0000   0.0000 15.50000000    01"
+      },
+      "altitude_km": 550,
+      "inclination_deg": 51.6,
+      "eccentricity": 0.0001,
+      "orbital_period_min": 95.7,
+      "velocity_km_s": 7.59
+    }
+  ],
+  "constellation": {
+    "name": "ORBITAL-VERIFICATION-NETWORK",
+    "total_nodes": 12,
+    "active_nodes": 12,
+    "coverage_percent": 98.5
+  },
+  "physics": {
+    "speed_of_light_km_s": 299792.458,
+    "fiber_refractive_index": 1.5,
+    "vacuum_refractive_index": 1.0,
+    "cosmic_background_temp_c": -270.45
+  },
+  "thermal": {
+    "terrestrial_baseline_c": 25,
+    "orbital_baseline_c": -270,
+    "radiative_equilibrium": true,
+    "noise_floor": {
+      "terrestrial": 0.08,
+      "orbital": 0.01
+    }
+  },
+  "verification": {
+    "throughput_terrestrial_per_s": 1,
+    "throughput_orbital_per_s": 10,
+    "power_cost_terrestrial_usd": 0.0003,
+    "power_cost_orbital_usd": 0.0,
+    "latency_improvement_pct": 40
+  }
+}
