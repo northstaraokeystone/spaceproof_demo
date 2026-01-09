@@ -230,6 +230,15 @@ function resetDemo() {
   DemoState.orbitalResult = null;
   DemoState.demoPhase = 'idle';
 
+  // Reset orbital visualization
+  const orbitContainer = document.getElementById('orbitContainer');
+  if (orbitContainer) {
+    orbitContainer.classList.remove('active');
+  }
+  if (window.OrbitVisualization) {
+    OrbitVisualization.highlightSatellite(false);
+  }
+
   ReceiptChain.reset();
 
   clearTerminal();
@@ -406,6 +415,15 @@ async function act2_TheAscent() {
   // Update state
   DemoState.mode = 'orbital';
   updateStatus('ORBITAL MODE', 'orbital');
+
+  // Activate orbital visualization
+  const orbitContainer = document.getElementById('orbitContainer');
+  if (orbitContainer) {
+    orbitContainer.classList.add('active');
+  }
+  if (window.OrbitVisualization) {
+    OrbitVisualization.highlightSatellite(true);
+  }
 
   // Emit mode switch receipt
   ReceiptChain.emitModeSwitchReceipt('terrestrial', 'orbital', {
