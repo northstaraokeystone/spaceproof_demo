@@ -7,8 +7,23 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Georgia&display=swap" rel="stylesheet">
+  <!-- Three.js for 3D orbit visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
+  <div class="main-layout">
+    <!-- 3D Orbit Visualization -->
+    <div class="orbit-container" id="orbitContainer">
+      <div class="orbit-overlay">
+        <div class="orbit-label">ORBITAL-NODE-7</div>
+        <div class="orbit-info" id="orbitInfo">
+          <span>ALT: 550km</span>
+          <span>INC: 51.6°</span>
+        </div>
+      </div>
+    </div>
+
   <div class="terminal-container">
     <!-- Header -->
     <header class="header">
@@ -62,6 +77,19 @@
   <script src="entropy_engine.js"></script>
   <script src="orbital_sim.js"></script>
   <script src="receipt_chain.js"></script>
+  <script src="orbit_visualization.js"></script>
   <script src="demo.js"></script>
+
+  <!-- Initialize 3D Visualization -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.getElementById('orbitContainer');
+      if (container && window.THREE && OrbitVisualization) {
+        OrbitVisualization.init(container);
+        console.log('Orbit visualization initialized');
+      }
+    });
+  </script>
+  </div><!-- close main-layout -->
 </body>
 </html>

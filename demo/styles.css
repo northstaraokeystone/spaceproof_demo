@@ -386,9 +386,98 @@ body {
   51%, 100% { opacity: 0; }
 }
 
+/* Main Layout - Split View */
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* 3D Orbit Visualization Container */
+.orbit-container {
+  width: 40%;
+  min-width: 400px;
+  height: 100vh;
+  position: relative;
+  background: #000510;
+  border-right: 1px solid var(--border);
+}
+
+.orbit-container canvas {
+  display: block;
+}
+
+.orbit-overlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.orbit-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--highlight);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.orbit-info {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--dim);
+  display: flex;
+  gap: 16px;
+}
+
+/* Satellite active state indicator */
+.orbit-container.active .orbit-label {
+  color: #00ff00;
+}
+
+.orbit-container.active::after {
+  content: 'LINK ACTIVE';
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #00ff00;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+/* Terminal adjustments for split view */
+.main-layout .terminal-container {
+  flex: 1;
+  max-width: none;
+  min-height: 100vh;
+}
+
 /* Responsive */
+@media (max-width: 1024px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .orbit-container {
+    width: 100%;
+    min-width: auto;
+    height: 300px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .main-layout .terminal-container {
+    min-height: auto;
+  }
+}
+
 @media (max-width: 768px) {
   .comparison-grid {
     grid-template-columns: 1fr;
+  }
+
+  .orbit-container {
+    height: 250px;
   }
 }
